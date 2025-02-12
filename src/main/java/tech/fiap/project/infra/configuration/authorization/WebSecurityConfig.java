@@ -13,6 +13,7 @@ import org.springframework.security.web.SecurityFilterChain;
 
 import static org.springframework.security.config.Customizer.withDefaults;
 
+@SuppressWarnings("all")
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig {

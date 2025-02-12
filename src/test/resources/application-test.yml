@@ -17,6 +17,8 @@ spring:
       show_sql: true
   main:
     allow-bean-definition-overriding: true
+  security:
+    enabled: false
 logging:
   level:
     root: INFO

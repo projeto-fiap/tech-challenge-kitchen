@@ -26,6 +26,7 @@ import java.awt.image.BufferedImage;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
+@SuppressWarnings("all")
 @org.springframework.context.annotation.Configuration
 @Getter
 @ComponentScan("tech.fiap.project")

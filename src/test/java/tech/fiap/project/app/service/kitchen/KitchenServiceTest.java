@@ -33,6 +33,9 @@ class KitchenServiceTest {
 	@Mock
 	private KitchenUpdateUseCase updateUseCase;
 
+	@Mock
+	private FinishOrderService finishOrderService;
+
 	@InjectMocks
 	private KitchenService kitchenService;
 
@@ -43,16 +46,16 @@ class KitchenServiceTest {
 
 	@Test
 	void create_shouldReturnKitchenDTO() {
-		// Kitchen kitchen = new Kitchen(1L, LocalDateTime.now(), LocalDateTime.now(),
-		// KitchenStatus.AWAITING_PRODUCTION);
-		// KitchenDTO expectedKitchenDTO = KitchenMapper.toDTO(kitchen);
-		//
-		// when(createUseCase.execute(any(Kitchen.class))).thenReturn(kitchen);
-		//
-		// Optional<KitchenDTO> result = kitchenService.create(order);
-		//
-		// assertTrue(result.isPresent());
-		// assertEquals(expectedKitchenDTO, result.get());
+		 Kitchen kitchen = new Kitchen(1L, LocalDateTime.now(), LocalDateTime.now(),
+		 KitchenStatus.AWAITING_PRODUCTION);
+		 KitchenDTO expectedKitchenDTO = KitchenMapper.toDTO(kitchen);
+
+		 when(createUseCase.execute(any(Kitchen.class))).thenReturn(kitchen);
+
+		 Optional<KitchenDTO> result = kitchenService.create(1L);
+
+		 assertTrue(result.isPresent());
+		 assertEquals(expectedKitchenDTO, result.get());
 	}
 
 	@Test

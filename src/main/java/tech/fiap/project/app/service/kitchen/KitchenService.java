@@ -1,7 +1,14 @@
 package tech.fiap.project.app.service.kitchen;
 
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
+import org.springframework.web.client.RestTemplate;
 import tech.fiap.project.app.adapter.KitchenMapper;
 import tech.fiap.project.app.dto.KitchenDTO;
 import tech.fiap.project.domain.entity.Kitchen;
@@ -11,7 +18,9 @@ import tech.fiap.project.domain.usecase.kitchen.KitchenRetrieveUseCase;
 import tech.fiap.project.domain.usecase.kitchen.KitchenUpdateUseCase;
 
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -23,6 +32,8 @@ public class KitchenService {
 	private KitchenCreateUseCase createUseCase;
 
 	private KitchenUpdateUseCase updateUseCase;
+
+	private FinishOrderService finishOrderService;
 
 	public Optional<KitchenDTO> create(Long orderId) {
 		var now = LocalDateTime.now();
@@ -58,6 +69,7 @@ public class KitchenService {
 			safeKitchen.setUpdatedDate(now);
 
 			Kitchen updatedKitchen = updateUseCase.execute(safeKitchen);
+			finishOrderService.finishOrder(kitchen.get().getOrderId());
 			return Optional.ofNullable(KitchenMapper.toDTO(updatedKitchen));
 		}
 
@@ -73,3 +85,4 @@ public class KitchenService {
 	}
 
 }
+
