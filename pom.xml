@@ -268,7 +268,6 @@
                             <goal>report</goal>
                         </goals>
                         <configuration>
-                            <destFile>${sonar.jacoco.reportPath}</destFile>
                             <excludes>
                                 <exclude>**/tech/fiap/project/infra/configuration/**/*.class</exclude>
                             </excludes>
