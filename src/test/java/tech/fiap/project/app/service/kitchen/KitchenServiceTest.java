@@ -46,16 +46,15 @@ class KitchenServiceTest {
 
 	@Test
 	void create_shouldReturnKitchenDTO() {
-		 Kitchen kitchen = new Kitchen(1L, LocalDateTime.now(), LocalDateTime.now(),
-		 KitchenStatus.AWAITING_PRODUCTION);
-		 KitchenDTO expectedKitchenDTO = KitchenMapper.toDTO(kitchen);
+		Kitchen kitchen = new Kitchen(1L, LocalDateTime.now(), LocalDateTime.now(), KitchenStatus.AWAITING_PRODUCTION);
+		KitchenDTO expectedKitchenDTO = KitchenMapper.toDTO(kitchen);
 
-		 when(createUseCase.execute(any(Kitchen.class))).thenReturn(kitchen);
+		when(createUseCase.execute(any(Kitchen.class))).thenReturn(kitchen);
 
-		 Optional<KitchenDTO> result = kitchenService.create(1L);
+		Optional<KitchenDTO> result = kitchenService.create(1L);
 
-		 assertTrue(result.isPresent());
-		 assertEquals(expectedKitchenDTO, result.get());
+		assertTrue(result.isPresent());
+		assertEquals(expectedKitchenDTO, result.get());
 	}
 
 	@Test

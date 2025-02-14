@@ -23,60 +23,57 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
-        classes = { Configuration.class, ServletWebServerFactoryAutoConfiguration.class })
+		classes = { Configuration.class, ServletWebServerFactoryAutoConfiguration.class })
 @ActiveProfiles("integration-test")
 public class KitchenIntegrationTest {
-    @Autowired
-    private TestRestTemplate restTemplate;
 
-    @Autowired
-    private KitchenRepository kitchenRepository;
+	@Autowired
+	private TestRestTemplate restTemplate;
 
-    @BeforeEach
-    void createUser() {
-        if (kitchenRepository.findAll().isEmpty()) {
-            KitchenEntity kitchen = new KitchenEntity();
-            kitchen.setStatus(KitchenStatus.AWAITING_PRODUCTION);
-            kitchen.setOrderId(1L);
-            kitchen.setCreationDate(LocalDateTime.now());
-            kitchen.setUpdatedDate(LocalDateTime.now());
-            kitchenRepository.save(kitchen);
-        }
-    }
+	@Autowired
+	private KitchenRepository kitchenRepository;
 
-    @Test
-    void getItem_shouldReturnItem_whenSuccessful() {
-        KitchenDTO requestDTO = new KitchenDTO();
-        ResponseEntity<KitchenDTO> response = restTemplate
-                .getForEntity("/api/v1/kitchen/1", KitchenDTO.class);
+	@BeforeEach
+	void createUser() {
+		if (kitchenRepository.findAll().isEmpty()) {
+			KitchenEntity kitchen = new KitchenEntity();
+			kitchen.setStatus(KitchenStatus.AWAITING_PRODUCTION);
+			kitchen.setOrderId(1L);
+			kitchen.setCreationDate(LocalDateTime.now());
+			kitchen.setUpdatedDate(LocalDateTime.now());
+			kitchenRepository.save(kitchen);
+		}
+	}
 
-        assertEquals(HttpStatus.OK, response.getStatusCode());
-        assertNotNull(response.getBody());
-    }
+	@Test
+	void getItem_shouldReturnItem_whenSuccessful() {
+		KitchenDTO requestDTO = new KitchenDTO();
+		ResponseEntity<KitchenDTO> response = restTemplate.getForEntity("/api/v1/kitchen/1", KitchenDTO.class);
 
-    @Test
-    void createItem_shouldReturnItem_whenSuccessful() {
-        KitchenDTO requestDTO = new KitchenDTO();
-        ResponseEntity<KitchenDTO> response = restTemplate
-                .postForEntity("/api/v1/kitchen/2/create", requestDTO, KitchenDTO.class);
+		assertEquals(HttpStatus.OK, response.getStatusCode());
+		assertNotNull(response.getBody());
+	}
 
-        assertEquals(HttpStatus.OK, response.getStatusCode());
-        assertNotNull(response.getBody());
-        assertEquals(response.getBody().getStatus(), KitchenStatus.AWAITING_PRODUCTION);
-    }
+	@Test
+	void createItem_shouldReturnItem_whenSuccessful() {
+		KitchenDTO requestDTO = new KitchenDTO();
+		ResponseEntity<KitchenDTO> response = restTemplate.postForEntity("/api/v1/kitchen/2/create", requestDTO,
+				KitchenDTO.class);
 
-    @Test
-    void productionItem_shouldReturnItem_whenSuccessful() {
-        KitchenDTO requestDTO = new KitchenDTO();
-        ResponseEntity<KitchenDTO> response = restTemplate.exchange(
-                "/api/v1/kitchen/1/production",
-                HttpMethod.PUT,
-                new HttpEntity<>(requestDTO),
-                KitchenDTO.class
-        );
+		assertEquals(HttpStatus.OK, response.getStatusCode());
+		assertNotNull(response.getBody());
+		assertEquals(response.getBody().getStatus(), KitchenStatus.AWAITING_PRODUCTION);
+	}
 
-        assertEquals(HttpStatus.OK, response.getStatusCode());
-        assertNotNull(response.getBody());
-        assertEquals(response.getBody().getStatus(), KitchenStatus.IN_PRODUCTION);
-    }
+	@Test
+	void productionItem_shouldReturnItem_whenSuccessful() {
+		KitchenDTO requestDTO = new KitchenDTO();
+		ResponseEntity<KitchenDTO> response = restTemplate.exchange("/api/v1/kitchen/1/production", HttpMethod.PUT,
+				new HttpEntity<>(requestDTO), KitchenDTO.class);
+
+		assertEquals(HttpStatus.OK, response.getStatusCode());
+		assertNotNull(response.getBody());
+		assertEquals(response.getBody().getStatus(), KitchenStatus.IN_PRODUCTION);
+	}
+
 }

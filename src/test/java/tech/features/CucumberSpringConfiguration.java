@@ -10,6 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 @CucumberContextConfiguration
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
-        classes = { Configuration.class, ServletWebServerFactoryAutoConfiguration.class })
+		classes = { Configuration.class, ServletWebServerFactoryAutoConfiguration.class })
 public class CucumberSpringConfiguration {
+
 }
