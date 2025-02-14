@@ -139,7 +139,7 @@ jobs:
           sonar_url: "https://sonarcloud.io"
           sonar_branch: ${{ github.ref_name }}
           sonar_token: ${{ secrets.SONAR_TOKEN }}
-          project_key: "ms-kitchen_tech-challenge-kitchen"
+          project_key: "projeto-fiap_tech-challenge-kitchen"
 
   send-docker-hub:
     name: Deploy PRD
