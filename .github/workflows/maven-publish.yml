@@ -131,15 +131,31 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0  # Shallow clones should be disabled for better analysis
+
+      - name: Run SonarQube Scan
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          GITHUB_REF_NAME: ${{ github.ref_name }}
+        run: |
+          echo "Starting SonarQube Analysis..."
+          sonar-scanner \
+            -Dsonar.projectKey=projeto-fiap_tech-challenge-kitchen \
+            -Dsonar.sources=. \
+            -Dsonar.host.url=https://sonarcloud.io \
+            -Dsonar.branch.name=${GITHUB_REF_NAME} \
+            -Dsonar.login=${SONAR_TOKEN}
+
       - name: Sonar Build Breaker
         env:
           GITHUB_REF_NAME: ${{ github.ref_name }}
+          DEBUG: 1  # Ativar logs detalhados
         uses: jkumar19/sonar-build-breaker@v1.0.0
         with:
           sonar_url: "https://sonarcloud.io"
           sonar_branch: ${{ github.ref_name }}
           sonar_token: ${{ secrets.SONAR_TOKEN }}
           project_key: "projeto-fiap_tech-challenge-kitchen"
+
 
   send-docker-hub:
     name: Deploy PRD
