@@ -1,0 +1,56 @@
+version: '3.3'
+
+services:
+  app:
+    build: .
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+      - keycloak
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/postgres?currentSchema=public
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: postgres
+    volumes:
+      - .:/app
+    command: mvn spring-boot:run -Dspring-boot.run.profiles=dev
+  db:
+    image: postgres:13
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - postgres-net
+
+#  keycloak:
+#    depends_on:
+#      - db
+#    container_name: local_keycloak
+#    environment:
+#      DB_VENDOR: postgres
+#      DB_ADDR: postgres
+#      DB_DATABASE: keycloack
+#      DB_USER: postgres
+#      DB_PASSWORD: postgres
+#      KC_BOOTSTRAP_ADMIN_USERNAME: user
+#      KC_BOOTSTRAP_ADMIN_PASSWORD : password
+#    image: quay.io/keycloak/keycloak:26.0.7
+#    ports:
+#      - "29000:8080"
+#    restart: unless-stopped
+#    command: start-dev
+#    networks:
+#      - postgres-net
+
+networks:
+  postgres-net:
+    driver: bridge
+
+volumes:
+  postgres-data:
