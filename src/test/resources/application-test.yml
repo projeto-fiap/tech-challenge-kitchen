@@ -7,22 +7,57 @@ spring:
     password: postgres
     driverClassName: org.h2.Driver
   liquibase:
-    change-log: classpath:db/changelog/db.changelog-master.xml
+    change-log: classpath:db/changelog/db.changelog-master-test.xml
     drop-first: true
     enabled: true
   jpa:
     database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: update
     properties:
       hibernate:
+      globally_quoted_identifiers: true
       show_sql: true
+  security:
+    oauth2:
+      client:
+        registration:
+          keycloak:
+            client-id: tech-challenge-payments
+            client-secret: Fcq5krDu6oATZ1mQtKqQ7uSWEOPnMdrM
+            authorization-grant-type: client-credentials
+            scope: openid, profile, email
+            redirect-uri: localhost/login/oauth2/code/keycloak
+            client-name: Pagamentos
+        provider:
+          keycloak:
+            token-uri: localhost/realms/master/protocol/openid-connect/token
+            authorization-uri: localhost/realms/master/protocol/openid-connect/auth
+            user-info-uri: localhost/realms/master/protocol/openid-connect/userinfo
+      resourceserver:
+        jwt:
+          issuer-uri: localhost/realms/master
   main:
     allow-bean-definition-overriding: true
-  security:
-    enabled: false
-logging:
+
+  mvc:
+    pathmatch:
+      matching-strategy=ant_path_matcher:logging:
   level:
     root: INFO
-mercado-pago:
-  access-token: TEST-6546844616028207-063020-f09a0b6563261874ab236fd560e23d9b-769812162
-  user-id: 769812162
-  pos: SUC001POS002
+tech-challenge:
+  client-id: tech-challenge
+  client-secret: lEF2yPgUrI57mSQyhPZTH1VuxUrMS1tx
+  payments:
+    base-url: http://localhost:8081
+  order:
+    base-url: localhost
+keycloak:
+  base-url: http://localhost:29000
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    operationsSorter: method
+    tagsSorter: alpha

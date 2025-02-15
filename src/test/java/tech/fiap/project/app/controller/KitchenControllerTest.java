@@ -92,11 +92,12 @@ class KitchenControllerTest {
 	@Test
 	void done_shouldReturnKitchenDTO_whenSuccessful() {
 		Long id = 1L;
+		String token = "";
 		KitchenDTO kitchenDTO = new KitchenDTO();
 
-		when(kitchenService.setDone(id)).thenReturn(Optional.of(kitchenDTO));
+		when(kitchenService.setDone(id, token)).thenReturn(Optional.of(kitchenDTO));
 
-		ResponseEntity<KitchenDTO> response = kitchenController.done(id);
+		ResponseEntity<KitchenDTO> response = kitchenController.done(id, token);
 
 		assertEquals(HttpStatus.OK, response.getStatusCode());
 		assertEquals(kitchenDTO, response.getBody());
@@ -105,10 +106,11 @@ class KitchenControllerTest {
 	@Test
 	void done_shouldReturnNotFound_whenNotFound() {
 		Long id = 1L;
+		String token = "";
 
-		when(kitchenService.setDone(id)).thenReturn(Optional.empty());
+		when(kitchenService.setDone(id, token)).thenReturn(Optional.empty());
 
-		ResponseEntity<KitchenDTO> response = kitchenController.done(id);
+		ResponseEntity<KitchenDTO> response = kitchenController.done(id, token);
 
 		assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
 	}

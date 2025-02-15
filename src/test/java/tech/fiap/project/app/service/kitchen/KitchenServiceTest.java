@@ -86,7 +86,7 @@ class KitchenServiceTest {
 		when(retrieveUseCase.findById(kitchenId)).thenReturn(Optional.of(kitchen));
 		when(updateUseCase.execute(any(Kitchen.class))).thenReturn(updatedKitchen);
 
-		Optional<KitchenDTO> result = kitchenService.setDone(kitchenId);
+		Optional<KitchenDTO> result = kitchenService.setDone(kitchenId, "");
 
 		assertTrue(result.isPresent());
 		assertEquals(expectedKitchenDTO, result.get());

@@ -59,7 +59,7 @@ public class KitchenService {
 		return Optional.empty();
 	}
 
-	public Optional<KitchenDTO> setDone(Long id) {
+	public Optional<KitchenDTO> setDone(Long id, String authorization) {
 		var now = LocalDateTime.now();
 		Optional<Kitchen> kitchen = retrieveUseCase.findById(id);
 
@@ -69,7 +69,7 @@ public class KitchenService {
 			safeKitchen.setUpdatedDate(now);
 
 			Kitchen updatedKitchen = updateUseCase.execute(safeKitchen);
-			finishOrderService.finishOrder(kitchen.get().getOrderId());
+			finishOrderService.finishOrder(kitchen.get().getOrderId(), authorization);
 			return Optional.ofNullable(KitchenMapper.toDTO(updatedKitchen));
 		}
 
@@ -85,4 +85,3 @@ public class KitchenService {
 	}
 
 }
-
