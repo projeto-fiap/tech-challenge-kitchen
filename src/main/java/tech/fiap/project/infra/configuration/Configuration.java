@@ -14,6 +14,7 @@ import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.DefaultUriBuilderFactory;
 import org.springframework.web.util.UriTemplateHandler;
+import tech.fiap.project.app.service.kitchen.FinishOrderService;
 import tech.fiap.project.domain.dataprovider.KitchenDataProvider;
 import tech.fiap.project.domain.usecase.impl.kitchen.KitchenCreateUseCaseImpl;
 import tech.fiap.project.domain.usecase.impl.kitchen.KitchenRetrieveUseCaseImpl;
@@ -44,6 +45,9 @@ public class Configuration {
 
 	@Value("${tech-challenge.client-secret}")
 	String paymentsClientSecret;
+
+	@Value("${tech-challenge.order.base-url}")
+	private String orderApiUrl;
 
 	@Bean
 	public ObjectMapper objectMapper() {
@@ -78,6 +82,11 @@ public class Configuration {
 	@Bean
 	public KitchenUpdateUseCase kitchenUpdateUseCase(KitchenDataProvider kitchenDataProvider) {
 		return new KitchenUpdateUseCaseImpl(kitchenDataProvider);
+	}
+
+	@Bean
+	public FinishOrderService finishOrderService(RestTemplate restTemplate) {
+		return new FinishOrderService(restTemplate, orderApiUrl);
 	}
 
 }
