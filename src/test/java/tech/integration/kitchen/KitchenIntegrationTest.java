@@ -11,6 +11,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ActiveProfiles;
+import tech.fiap.project.app.controller.KitchenController;
 import tech.fiap.project.app.dto.KitchenDTO;
 import tech.fiap.project.domain.entity.KitchenStatus;
 import tech.fiap.project.infra.configuration.Configuration;
@@ -28,7 +29,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 public class KitchenIntegrationTest {
 
 	@Autowired
-	private TestRestTemplate restTemplate;
+	private KitchenController kitchenController;
 
 	@Autowired
 	private KitchenRepository kitchenRepository;
@@ -48,7 +49,7 @@ public class KitchenIntegrationTest {
 	@Test
 	void getItem_shouldReturnItem_whenSuccessful() {
 		KitchenDTO requestDTO = new KitchenDTO();
-		ResponseEntity<KitchenDTO> response = restTemplate.getForEntity("/api/v1/kitchen/1", KitchenDTO.class);
+		ResponseEntity<KitchenDTO> response = kitchenController.retrieveOrderById(1L);
 
 		assertEquals(HttpStatus.OK, response.getStatusCode());
 		assertNotNull(response.getBody());
@@ -57,8 +58,7 @@ public class KitchenIntegrationTest {
 	@Test
 	void createItem_shouldReturnItem_whenSuccessful() {
 		KitchenDTO requestDTO = new KitchenDTO();
-		ResponseEntity<KitchenDTO> response = restTemplate.postForEntity("/api/v1/kitchen/2/create", requestDTO,
-				KitchenDTO.class);
+		ResponseEntity<KitchenDTO> response = kitchenController.create(2L);
 
 		assertEquals(HttpStatus.OK, response.getStatusCode());
 		assertNotNull(response.getBody());
@@ -68,8 +68,7 @@ public class KitchenIntegrationTest {
 	@Test
 	void productionItem_shouldReturnItem_whenSuccessful() {
 		KitchenDTO requestDTO = new KitchenDTO();
-		ResponseEntity<KitchenDTO> response = restTemplate.exchange("/api/v1/kitchen/1/production", HttpMethod.PUT,
-				new HttpEntity<>(requestDTO), KitchenDTO.class);
+		ResponseEntity<KitchenDTO> response = kitchenController.production(1L);
 
 		assertEquals(HttpStatus.OK, response.getStatusCode());
 		assertNotNull(response.getBody());

@@ -50,7 +50,8 @@ tech-challenge:
   client-secret: lEF2yPgUrI57mSQyhPZTH1VuxUrMS1tx
   payments:
     base-url: http://localhost:8081
-
+  order:
+    base-url: ${TECH_CHALLENGE_ORDER_BASE_URL}
 keycloak:
     base-url: http://localhost:29000
 springdoc:

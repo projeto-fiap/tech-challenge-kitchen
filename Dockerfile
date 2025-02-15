@@ -1,15 +1,24 @@
 FROM openjdk:17-jdk-slim
 
-# Define o diretório de trabalho
 WORKDIR /app
 
-# Instala o Maven
 RUN apt-get update \
-    && apt-get install --no-install-recommends -y maven \
-    && apt-get clean
+&& apt-get install --no-install-recommends -y build-essential nginx \
+&& apt-get clean \
+&& apt-get install --no-install-recommends -y build-essential git \
+&& apt-get clean \
+&& git config --global user.name "Leonardo Soares" \
+&& git config --global user.email "leonardo.soares@sptech.school.com.br" \
+&& git clone https://github.com/projeto-fiap/tech-challenge-kitchen.git
+WORKDIR /app/tech-challenge-kitchen
 
-# Expõe a porta da aplicação
-EXPOSE 8080
+RUN apt-get update \
+&& apt-get install --no-install-recommends -y build-essential maven \
+&& apt-get clean \
+&& mvn clean install
 
-# Define o comando de entrada, rodando a aplicação com Maven
-CMD ["mvn", "spring-boot:run", "-Dspring-boot.run.profiles=dev"]
+RUN useradd -m nonroot
+
+USER nonroot
+EXPOSE 8082
+CMD ["java", "-jar", "target/project-0.0.1-SNAPSHOT.jar", "--spring.profiles.active=prd"]
