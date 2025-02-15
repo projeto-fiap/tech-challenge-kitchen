@@ -12,6 +12,7 @@ import org.springframework.web.client.RestTemplate;
 public class FinishOrderService {
 
 	private final RestTemplate restTemplate;
+
 	private final String orderBaseUrl;
 
 	public ResponseEntity<String> finishOrder(Long order, String authorization) {
