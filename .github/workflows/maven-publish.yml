@@ -158,7 +158,7 @@ jobs:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_PASSWORD }}
       - name: Clone Repository and Build Docker Image
-        run: git clone https://github.com/projeto-fiap/tech-challenge-kitchen.git && docker build . -t matheuspatricio0/ms-kitchen:latest
+        run: git clone https://github.com/projeto-fiap/tech-challenge-kitchen.git && cd tech-challenge-kitchen && docker build . -t matheuspatricio0/ms-kitchen:latest
       - name: Push Docker image
         run: docker push matheuspatricio0/ms-kitchen:latest
 
