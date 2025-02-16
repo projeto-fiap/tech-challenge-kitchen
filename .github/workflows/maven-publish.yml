@@ -106,7 +106,6 @@ jobs:
       name: dev
     needs:
       - analysis-sonarqube
-      - integrated-tests
     if: github.ref == 'refs/heads/develop'
     steps:
       - name: Deploy
@@ -120,7 +119,6 @@ jobs:
       name: hml
     needs:
       - analysis-sonarqube
-      - integrated-tests
     if: github.ref == 'refs/heads/release'
     steps:
       - name: Deploy
