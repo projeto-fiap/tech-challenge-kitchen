@@ -4,7 +4,7 @@ metadata:
   name: app-service
 spec:
   selector:
-    app: app
+    app: tech-challenge-kitchen
   ports:
     - protocol: TCP
       port: 8080
