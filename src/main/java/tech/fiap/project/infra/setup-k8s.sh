@@ -15,7 +15,7 @@ cd src/main/resources/k8s || { echo "Diretório 'src/main/resources/k8s' não en
 
 kubectl apply -f db.yaml || { echo "Falha ao aplicar db.yaml"; exit 1; }
 
-kubectl apply -f app-deployment.yaml || { echo "Falha ao aplicar app-deployment.yaml"; exit 1; }
+kubectl apply -f tech-challenge-kitchen-deployment.yaml || { echo "Falha ao aplicar app-deployment.yaml"; exit 1; }
 
 kubectl apply -f service-tech-challenge-kitchen.yaml || { echo "Falha ao aplicar service.yaml"; exit 1; }
 
