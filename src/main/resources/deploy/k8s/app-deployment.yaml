@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: app
-          image: matheuspatricio0/projeto-fiap:1.0.2
+          image: matheuspatricio0/ms-kitchen:latest
           resources:
             requests:
               memory: "256Mi"

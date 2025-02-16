@@ -137,7 +137,7 @@ jobs:
         uses: jkumar19/sonar-build-breaker@v1.0.0
         with:
           sonar_url: "https://sonarcloud.io"
-          sonar_branch: ${{ github.ref_name }}
+          sonar_branch: ${{ github.event_name == 'pull_request' && github.head_ref || github.ref_name }}
           sonar_token: ${{ secrets.SONAR_TOKEN }}
           project_key: projeto-fiap_tech-challenge-kitchen
 
@@ -186,3 +186,32 @@ jobs:
         shell: bash
         run:
           echo "Deploy HML"
+
+
+  deploy-prd:
+    runs-on: ubuntu-latest
+    environment:
+      name: hml
+    needs:
+      - send-docker-hub
+
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      #      - name: Configure AWS Credentials
+      #        uses: aws-actions/configure-aws-credentials@v1
+      #        with:
+      #          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      #          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      #          aws-region: us-east-1
+      #          aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
+      - name: Update Kube Config
+        run: aws eks update-kubeconfig --name kubernetes-tech-challenge --region us-east-1
+      - name: Current Context
+        run: kubectl config current-context
+      - name: Deploy Kubernetes Resources
+        run: |
+          kubectl apply -f src/main/resources/deploy/k8s/app-deployment.yaml -n default-namespace
+          kubectl apply -f src/main/resources/deploy/k8s/hpa.yaml -n default-namespace
+          kubectl apply -f src/main/resources/deploy/k8s/service.yaml -n default-namespace

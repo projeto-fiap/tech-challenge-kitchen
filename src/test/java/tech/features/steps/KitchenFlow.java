@@ -5,10 +5,12 @@ import static org.junit.jupiter.api.Assertions.*;
 import io.cucumber.java.en.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 import tech.fiap.project.app.dto.KitchenDTO;
 import tech.fiap.project.app.service.kitchen.KitchenService;
 
 @SpringBootTest
+@ActiveProfiles("integration-test")
 public class KitchenFlow {
 
 	@Autowired
