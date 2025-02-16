@@ -22,7 +22,8 @@ public class FinishOrderService {
 		header.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
 		header.add("Accept", "application/json");
 
-		String uri = String.format(orderBaseUrl, order);
+		String uri = orderBaseUrl + "/deliver/" + order;
+		System.out.println(uri);
 
 		return restTemplate.postForEntity(uri, null, String.class);
 	}
