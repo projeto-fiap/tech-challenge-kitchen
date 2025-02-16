@@ -33,4 +33,3 @@ spec:
               value: postgres
             - name: KEYCLOAK_BASE_URL
               value: http://a3324cb770adc4cc5903a935349dde87-370143530.us-east-1.elb.amazonaws.com
-

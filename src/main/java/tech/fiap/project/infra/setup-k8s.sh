@@ -17,8 +17,8 @@ kubectl apply -f db.yaml || { echo "Falha ao aplicar db.yaml"; exit 1; }
 
 kubectl apply -f app-deployment.yaml || { echo "Falha ao aplicar app-deployment.yaml"; exit 1; }
 
-kubectl apply -f service.yaml || { echo "Falha ao aplicar service.yaml"; exit 1; }
+kubectl apply -f service-tech-challenge-kitchen.yaml || { echo "Falha ao aplicar service.yaml"; exit 1; }
 
-kubectl apply -f hpa.yaml || { echo "Falha ao aplicar hpa.yaml"; exit 1; }
+kubectl apply -f hpa-tech-challenge-kitchen.yaml || { echo "Falha ao aplicar hpa.yaml"; exit 1; }
 
 echo "Infraestrutura do Kubernetes aplicada com sucesso!"
