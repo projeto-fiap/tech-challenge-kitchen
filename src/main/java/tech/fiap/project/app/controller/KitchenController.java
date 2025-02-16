@@ -1,5 +1,6 @@
 package tech.fiap.project.app.controller;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,6 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api/v1/kitchen")
+@SecurityRequirement(name = "BearerAuth")
 @AllArgsConstructor
 public class KitchenController {
 
