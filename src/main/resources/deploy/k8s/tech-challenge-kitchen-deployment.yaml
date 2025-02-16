@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: tech-challenge-kitchen
+  name: tech-challenge-kitchen-deployment
   namespace: default-namespace
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: app
+      app: tech-challenge-kitchen
   template:
     metadata:
       labels:
-        app: app
+        app: tech-challenge-kitchen
     spec:
       containers:
-        - name: app
+        - name: tech-challenge-kitchen
           image: matheuspatricio0/ms-kitchen:latest
           resources:
             requests:
