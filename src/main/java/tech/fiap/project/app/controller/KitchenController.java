@@ -39,9 +39,8 @@ public class KitchenController {
 	}
 
 	@PutMapping("/{id}/done")
-	public ResponseEntity<KitchenDTO> done(@PathVariable Long id,
-			@RequestHeader("Authorization") String authorization) {
-		return kitchenService.setDone(id, authorization).map(ResponseEntity::ok)
+	public ResponseEntity<KitchenDTO> done(@PathVariable Long id) {
+		return kitchenService.setDone(id).map(ResponseEntity::ok)
 				.orElse(ResponseEntity.notFound().build());
 	}
 

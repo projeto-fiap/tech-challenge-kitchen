@@ -55,7 +55,7 @@ class KitchenDataProviderImplTest {
 
 	@Test
 	void create_shouldSaveAndReturnKitchen() {
-		Kitchen kitchen = new Kitchen(1L, LocalDateTime.now(), LocalDateTime.now(), KitchenStatus.DONE);
+		Kitchen kitchen = new Kitchen(1L, LocalDateTime.now(), LocalDateTime.now(), KitchenStatus.FINISHED);
 		KitchenEntity kitchenEntity = new KitchenEntity();
 		kitchenEntity.setOrderId(1L);
 		when(kitchenRepository.save(any())).thenReturn(kitchenEntity);

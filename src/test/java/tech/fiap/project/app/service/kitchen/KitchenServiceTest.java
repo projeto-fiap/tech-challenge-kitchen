@@ -91,7 +91,7 @@ class KitchenServiceTest {
 
 		when(retrieveUseCase.findById(kitchenId)).thenReturn(Optional.empty());
 
-		Optional<KitchenDTO> result = kitchenService.setDone(kitchenId, "");
+		Optional<KitchenDTO> result = kitchenService.setDone(kitchenId);
 
 		assertFalse(result.isPresent());
 	}
@@ -101,13 +101,13 @@ class KitchenServiceTest {
 		Long kitchenId = 1L;
 		Kitchen kitchen = new Kitchen(kitchenId, LocalDateTime.now(), LocalDateTime.now(),
 				KitchenStatus.AWAITING_PRODUCTION);
-		Kitchen updatedKitchen = new Kitchen(kitchenId, LocalDateTime.now(), LocalDateTime.now(), KitchenStatus.DONE);
+		Kitchen updatedKitchen = new Kitchen(kitchenId, LocalDateTime.now(), LocalDateTime.now(), KitchenStatus.FINISHED);
 		KitchenDTO expectedKitchenDTO = KitchenMapper.toDTO(updatedKitchen);
 
 		when(retrieveUseCase.findById(kitchenId)).thenReturn(Optional.of(kitchen));
 		when(updateUseCase.execute(any(Kitchen.class))).thenReturn(updatedKitchen);
 
-		Optional<KitchenDTO> result = kitchenService.setDone(kitchenId, "");
+		Optional<KitchenDTO> result = kitchenService.setDone(kitchenId);
 
 		assertTrue(result.isPresent());
 		assertEquals(expectedKitchenDTO, result.get());

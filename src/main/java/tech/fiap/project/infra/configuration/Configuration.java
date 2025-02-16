@@ -86,7 +86,7 @@ public class Configuration {
 
 	@Bean
 	public FinishOrderService finishOrderService(RestTemplate restTemplate) {
-		return new FinishOrderService(restTemplate, orderApiUrl);
+		return new FinishOrderService(restTemplate, paymentsClientId, keycloakBaseUrl, paymentsClientSecret,orderApiUrl);
 	}
 
 }

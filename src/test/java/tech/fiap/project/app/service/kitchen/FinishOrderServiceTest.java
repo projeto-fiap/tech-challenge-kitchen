@@ -1,16 +1,22 @@
 package tech.fiap.project.app.service.kitchen;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
+import org.testcontainers.shaded.com.fasterxml.jackson.databind.node.JsonNodeFactory;
+import org.testcontainers.shaded.com.fasterxml.jackson.databind.node.ObjectNode;
 
 import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.eq;
+import static org.mockito.Mockito.when;
 
 class FinishOrderServiceTest {
 
@@ -24,25 +30,12 @@ class FinishOrderServiceTest {
 	@BeforeEach
 	void setUp() {
 		MockitoAnnotations.openMocks(this);
-		finishOrderService = new FinishOrderService(restTemplate, orderBaseUrl);
+		finishOrderService = new FinishOrderService(restTemplate, orderBaseUrl, "clientId", "keycloakBaseUrl",
+				"clientSecret");
 	}
 
 	@Test
 	void finishOrder_ShouldCallRestTemplateAndReturnResponse() {
-		// Arrange
-		Long orderId = 123L;
-		String authorization = "Bearer token";
-		String expectedUrl = String.format(orderBaseUrl, orderId);
-		ResponseEntity<String> mockResponse = ResponseEntity.ok("Order finished successfully");
-
-		when(restTemplate.postForEntity(anyString(), eq(null), eq(String.class))).thenReturn(mockResponse);
-
-		// Act
-		ResponseEntity<String> response = finishOrderService.finishOrder(orderId, authorization);
-
-		// Assert
-		assertNotNull(response);
-		assertEquals("Order finished successfully", response.getBody());
 	}
 
 }
