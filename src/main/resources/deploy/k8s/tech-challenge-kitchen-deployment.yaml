@@ -25,7 +25,7 @@ spec:
           ports:
             - containerPort: 8080
           env:
-            - name: SPRING_DATASOURCE_URL
+            - name: POSTGRES_URL
               value: jdbc:postgresql://mskitchendb.caetpmx4dios.us-east-1.rds.amazonaws.com/postgres?currentSchema=public
             - name: SPRING_DATASOURCE_USERNAME
               value: postgres

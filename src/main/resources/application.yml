@@ -2,7 +2,7 @@ spring:
   application:
     name: project
   datasource:
-    url: jdbc:postgresql://localhost:5432/postgres?currentSchema=public
+    url: ${POSTGRES_URL:jdbc:postgresql://localhost:5432/postgres?currentSchema=payments}
     username: postgres
     password: postgres
     driver-class-name: org.postgresql.Driver
