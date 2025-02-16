@@ -31,5 +31,6 @@ spec:
               value: postgres
             - name: SPRING_DATASOURCE_PASSWORD
               value: postgres
-
+            - name: KEYCLOAK_BASE_URL
+              value: http://a35eaf96976814aafa0800213cb0a901-1833872259.us-east-1.elb.amazonaws.com
 
