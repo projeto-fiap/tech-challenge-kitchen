@@ -58,13 +58,13 @@ class KitchenRepositoryMapperTest {
 		kitchenEntity1.setOrderId(1L);
 		kitchenEntity1.setCreationDate(LocalDateTime.now());
 		kitchenEntity1.setUpdatedDate(LocalDateTime.now());
-		kitchenEntity1.setStatus(KitchenStatus.DONE);
+		kitchenEntity1.setStatus(KitchenStatus.FINISHED);
 
 		KitchenEntity kitchenEntity2 = new KitchenEntity();
 		kitchenEntity2.setOrderId(2L);
 		kitchenEntity2.setCreationDate(LocalDateTime.now());
 		kitchenEntity2.setUpdatedDate(LocalDateTime.now());
-		kitchenEntity2.setStatus(KitchenStatus.DONE);
+		kitchenEntity2.setStatus(KitchenStatus.FINISHED);
 		List<KitchenEntity> kitchenEntities = List.of(kitchenEntity1, kitchenEntity2);
 		List<Kitchen> kitchens = KitchenRepositoryMapper.toDomain(kitchenEntities);
 

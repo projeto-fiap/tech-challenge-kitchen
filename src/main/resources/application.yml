@@ -46,12 +46,12 @@ spring:
   level:
     root: INFO
 tech-challenge:
-  client-id: tech-challenge
-  client-secret: lEF2yPgUrI57mSQyhPZTH1VuxUrMS1tx
+  client-id: tech-challenge-payments
+  client-secret: "**********"
   payments:
-    base-url: http://localhost:8081
+    base-url: ${TECH_CHALLENGE_PAYMENT_BASE_URL:http://localhost:8081}
   order:
-    base-url: ${TECH_CHALLENGE_ORDER_BASE_URL}
+    base-url: ${TECH_CHALLENGE_ORDER_BASE_URL:http://localhost:8082}
 keycloak:
     base-url: http://localhost:29000
 springdoc:
