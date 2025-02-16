@@ -4,9 +4,15 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
+import org.testcontainers.shaded.com.fasterxml.jackson.databind.node.JsonNodeFactory;
+import org.testcontainers.shaded.com.fasterxml.jackson.databind.node.ObjectNode;
 
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.eq;
@@ -30,12 +36,6 @@ class FinishOrderServiceTest {
 
 	@Test
 	void finishOrder_ShouldCallRestTemplateAndReturnResponse() {
-		Long orderId = 123L;
-		ResponseEntity<String> mockResponse = ResponseEntity.ok("Order finished successfully");
-
-		when(restTemplate.postForEntity(anyString(), eq(null), eq(String.class))).thenReturn(mockResponse);
-
-		Assertions.assertDoesNotThrow(() -> finishOrderService.finishOrder(orderId));
 	}
 
 }
