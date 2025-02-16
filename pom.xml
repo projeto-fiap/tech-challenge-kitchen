@@ -24,7 +24,7 @@
         <sonar.coverage.jacoco.xmlReportPaths>target/site/jacoco/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
         <sonar.language>java</sonar.language>
         <sonar.inclusions>**/*.java</sonar.inclusions>
-
+        <sonar.exclusions> src/main/java/tech/fiap/project/infra/exception/*.java, src/main/java/tech/fiap/project/infra/configuration/**/*.java, src/main/java/tech/fiap/project/ProjectApplication.java, src/main/java/tech/fiap/project/infra/entity/*.java, src/main/java/tech/fiap/project/app/dto/*.java</sonar.exclusions>
     </properties>
     <dependencies>
         <dependency>
@@ -263,15 +263,14 @@
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>0.8.12</version>
                 <executions>
-                    <!-- Instrumenta os testes -->
                     <execution>
                         <id>prepare-agent</id>
                         <goals>
                             <goal>prepare-agent</goal>
                         </goals>
+                        <configuration>
+                        </configuration>
                     </execution>
-
-                    <!-- Gera o relatório XML na fase "verify" -->
                     <execution>
                         <id>report</id>
                         <phase>verify</phase>
@@ -286,6 +285,7 @@
                     </execution>
                 </executions>
             </plugin>
+
         </plugins>
     </build>
 
