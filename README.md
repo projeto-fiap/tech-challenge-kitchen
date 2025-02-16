@@ -1,3 +1,8 @@
+# Sonar
+[Sonar - MS Kitchen](https://sonarcloud.io/summary/overall?id=projeto-fiap_tech-challenge-kitchen&branch=main)
+
+![image](https://github.com/user-attachments/assets/2870502a-cc1d-4750-a3b4-162ad94079d1)
+
 # Desenho de Arquitetura
   
 ![Desenho de Arquitetura - Problema](./Desenho_arquitetura.drawio.png)
