@@ -17,8 +17,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
@@ -73,6 +72,28 @@ class KitchenServiceTest {
 
 		assertTrue(result.isPresent());
 		assertEquals(expectedKitchenDTO, result.get());
+	}
+
+	@Test
+	void setInProductionNotFound_shouldReturnNull() {
+		Long kitchenId = 2L;
+
+		when(retrieveUseCase.findById(kitchenId)).thenReturn(Optional.empty());
+
+		Optional<KitchenDTO> result = kitchenService.setInProduction(kitchenId);
+
+		assertFalse(result.isPresent());
+	}
+
+	@Test
+	void setInDoneNotFound_shouldReturnNull() {
+		Long kitchenId = 2L;
+
+		when(retrieveUseCase.findById(kitchenId)).thenReturn(Optional.empty());
+
+		Optional<KitchenDTO> result = kitchenService.setDone(kitchenId, "");
+
+		assertFalse(result.isPresent());
 	}
 
 	@Test
