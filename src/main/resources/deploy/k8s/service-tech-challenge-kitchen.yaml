@@ -8,6 +8,6 @@ spec:
     app: tech-challenge-kitchen
   ports:
     - protocol: TCP
-      port: 8088
-      targetPort: 8088
+      port: 8082
+      targetPort: 8082
   type: LoadBalancer
