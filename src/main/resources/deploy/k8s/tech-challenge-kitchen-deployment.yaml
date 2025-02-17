@@ -24,7 +24,7 @@ spec:
               memory: "512Mi"
               cpu: "500m"
           ports:
-            - containerPort: 8082
+            - containerPort: 8088
           env:
             - name: POSTGRES_URL
               value: jdbc:postgresql://mskitchendb.caetpmx4dios.us-east-1.rds.amazonaws.com/postgres?currentSchema=public
@@ -33,4 +33,4 @@ spec:
             - name: SPRING_DATASOURCE_PASSWORD
               value: postgres
             - name: KEYCLOAK_BASE_URL
-              value: http://a3324cb770adc4cc5903a935349dde87-370143530.us-east-1.elb.amazonaws.com
+              value: http://a740e813c410c4d05a99835a58e149d0-1270066710.us-east-1.elb.amazonaws.com

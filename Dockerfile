@@ -20,5 +20,5 @@ RUN apt-get update \
 RUN useradd -m nonroot
 
 USER nonroot
-EXPOSE 8082
+EXPOSE 8088
 CMD ["java", "-jar", "target/ms-kitchen-0.0.1-SNAPSHOT.jar", "--spring.profiles.active=prd"]
